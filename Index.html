@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android-style Calculator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        #calculator {
+            width: 320px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            background-color: #fff;
+        }
+        #display {
+            width: 100%;
+            height: 60px;
+            background-color: #222;
+            color: #fff;
+            text-align: right;
+            padding: 10px;
+            font-size: 2em;
+            border-radius: 10px 10px 0 0;
+        }
+        .button {
+            width: 25%;
+            padding: 15px;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            margin: 5px;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div id="calculator">
+        <div id="display">0</div>
+        <div>
+            <button class="button">1</button>
+            <button class="button">2</button>
+            <button class="button">3</button>
+            <button class="button">/</button>
+        </div>
+        <div>
+            <button class="button">4</button>
+            <button class="button">5</button>
+            <button class="button">6</button>
+            <button class="button">*</button>
+        </div>
+        <div>
+            <button class="button">7</button>
+            <button class="button">8</button>
+            <button class="button">9</button>
+            <button class="button">-</button>
+        </div>
+        <div>
+            <button class="button">C</button>
+            <button class="button">0</button>
+            <button class="button">=</button>
+            <button class="button">+</button>
+        </div>
+    </div>
+    <script>
+        const display = document.getElementById('display');
+        let currentInput = '';
+
+        document.querySelectorAll('.button').forEach(button => {
+            button.addEventListener('click', () => {
+                const value = button.innerText;
+                if (value === 'C') {
+                    currentInput = '';
+                    display.innerText = '0';
+                } else if (value === '=') {
+                    try {
+                        display.innerText = eval(currentInput);
+                        currentInput = '';
+                    } catch {
+                        display.innerText = 'Error';
+                    }
+                } else {
+                    currentInput += value;
+                    display.innerText = currentInput;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
